@@ -1,7 +1,7 @@
-import { PublicKey } from '@solana/web3.js'
-import { useConnection } from '@/components/solana/solana-provider'
-import { useQuery, useQueryClient } from '@tanstack/react-query'
-import { TOKEN_2022_PROGRAM_ID, TOKEN_PROGRAM_ID } from '@solana/spl-token'
+import { useConnection } from '@/components/solana/solana-provider';
+import { TOKEN_2022_PROGRAM_ID, TOKEN_PROGRAM_ID } from '@solana/spl-token';
+import { PublicKey } from '@solana/web3.js';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 export function useGetTokenAccountsQueryKey({ address, endpoint }: { address: PublicKey; endpoint: string }) {
   return ['get-token-accounts', { endpoint, address }]

@@ -1,14 +1,23 @@
-import { AppView } from '@/components/app-view'
 import { AppText } from '@/components/app-text'
-import { PublicKey } from '@solana/web3.js'
-import Snackbar from 'react-native-snackbar'
-import { ActivityIndicator, TextInput, View } from 'react-native'
-import React, { useState } from 'react'
-import { Button } from '@react-navigation/elements'
-import { useThemeColor } from '@/hooks/use-theme-color'
-import { useMutation } from '@tanstack/react-query'
+import { AppView } from '@/components/app-view'
 import { useWalletUi } from '@/components/solana/use-wallet-ui'
+import { useThemeColor } from '@/hooks/use-theme-color'
 import { ellipsify } from '@/utils/ellipsify'
+import { Button } from '@react-navigation/elements'
+import { PublicKey } from '@solana/web3.js'
+import { useMutation } from '@tanstack/react-query'
+import React, { useState } from 'react'
+import { ActivityIndicator, Platform, TextInput, View } from 'react-native'
+
+// Conditionally import Snackbar only on mobile platforms
+let Snackbar: any = null
+if (Platform.OS === 'android' || Platform.OS === 'ios') {
+  try {
+    Snackbar = require('react-native-snackbar').default
+  } catch (error) {
+    console.log('Snackbar not available on this platform')
+  }
+}
 
 function useSignMessage({ address }: { address: PublicKey }) {
   const { signMessage } = useWalletUi()
@@ -52,10 +61,13 @@ export function DemoFeatureSignMessage({ address }: { address: PublicKey }) {
                 .mutateAsync({ message })
                 .then(() => {
                   console.log(`Signed message: ${message} with ${address.toString()}`)
-                  Snackbar.show({
-                    text: `Signed message with ${ellipsify(address.toString(), 8)}`,
-                    duration: Snackbar.LENGTH_SHORT,
-                  })
+                  // Only show Snackbar if it's available (mobile platforms)
+                  if (Snackbar) {
+                    Snackbar.show({
+                      text: `Signed message with ${ellipsify(address.toString(), 8)}`,
+                      duration: Snackbar.LENGTH_SHORT,
+                    })
+                  }
                 })
                 .catch((err) => console.log(`Error signing message: ${err}`, err))
             }}

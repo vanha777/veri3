@@ -1,15 +1,17 @@
-import { PublicKey } from '@solana/web3.js'
-import { AppText } from '@/components/app-text'
-import { ActivityIndicator, View } from 'react-native'
-import { AppView } from '@/components/app-view'
-import { ellipsify } from '@/utils/ellipsify'
 import { AccountUiTokenBalance } from '@/components/account/account-ui-token-balance'
 import { useGetTokenAccounts } from '@/components/account/use-get-token-accounts'
+import { AppText } from '@/components/app-text'
+import { AppView } from '@/components/app-view'
+import { ellipsify } from '@/utils/ellipsify'
+import { PublicKey } from '@solana/web3.js'
+import { ActivityIndicator, View } from 'react-native'
 
 export function AccountUiTokenAccounts({ address }: { address: PublicKey }) {
+  console.log('inside account address ......', address)
   let query = useGetTokenAccounts({ address })
+  console.log('inside account query ......', query)
   const items = query.data ?? []
-
+  console.log('inside account items ......', items)
   return (
     <>
       <AppText type="subtitle" style={{ marginBottom: 8 }}>
