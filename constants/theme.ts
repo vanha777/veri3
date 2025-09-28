@@ -5,25 +5,37 @@
 
 import { Platform } from 'react-native';
 
-const tintColorLight = '#0a7ea4';
-const tintColorDark = '#fff';
+// Gradient primary colors
+const primaryGradientStart = '#56D9D4';
+const primaryGradientEnd = '#CE32CC';
 
 export const Colors = {
   light: {
     text: '#11181C',
     background: '#fff',
-    tint: tintColorLight,
+    tint: primaryGradientStart,
     icon: '#687076',
     tabIconDefault: '#687076',
-    tabIconSelected: tintColorLight,
+    tabIconSelected: primaryGradientStart,
+    card: '#f8f9fa',
+    border: '#e9ecef',
+    surface: '#ffffff',
   },
   dark: {
-    text: '#ECEDEE',
-    background: '#151718',
-    tint: tintColorDark,
-    icon: '#9BA1A6',
-    tabIconDefault: '#9BA1A6',
-    tabIconSelected: tintColorDark,
+    text: '#FFFFFF',
+    background: '#1C1C1E',
+    tint: primaryGradientStart,
+    icon: '#A0A0A0',
+    tabIconDefault: '#A0A0A0',
+    tabIconSelected: primaryGradientStart,
+    card: '#2C2C2E',
+    border: '#3A3A3C',
+    surface: '#1C1C1E',
+    secondaryText: '#A0A0A0',
+    tabBarBackground: '#1A1A1A',
+  },
+  gradient: {
+    primary: [primaryGradientStart, primaryGradientEnd] as const,
   },
 };
 
